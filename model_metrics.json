@@ -1,0 +1,42 @@
+{
+    "accuracy": 0.8638743455497382,
+    "precision": 0.6507936507936508,
+    "recall": 0.9111111111111111,
+    "f1_score": 0.7592592592592593,
+    "confusion_matrix": [
+        [
+            124,
+            22
+        ],
+        [
+            4,
+            41
+        ]
+    ],
+    "feature_importance": [
+        {
+            "Feature": "Age",
+            "Importance": 0.22847477847003492
+        },
+        {
+            "Feature": "FrequentFlyer",
+            "Importance": 0.22209522883767893
+        },
+        {
+            "Feature": "ServicesOpted",
+            "Importance": 0.20038105495035713
+        },
+        {
+            "Feature": "AnnualIncomeClass",
+            "Importance": 0.19708190717727508
+        },
+        {
+            "Feature": "AccountSyncedToSocialMedia",
+            "Importance": 0.09654179453905885
+        },
+        {
+            "Feature": "BookedHotelOrNot",
+            "Importance": 0.05542523602559511
+        }
+    ]
+}
