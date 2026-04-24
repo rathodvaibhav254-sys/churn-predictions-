@@ -1,0 +1,125 @@
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;500;600;700&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: #0a0a0f;
+    --foreground: #e0e0e0;
+  }
+  
+  body {
+    background-color: var(--background);
+    color: var(--foreground);
+    font-family: 'Rajdhani', sans-serif;
+  }
+
+  h1, h2, h3, h4, h5, h6, .orbitron {
+    font-family: 'Orbitron', monospace;
+  }
+}
+
+@layer utilities {
+  .neon-text-magenta {
+    color: #ff00ff;
+    text-shadow: 0 0 10px #ff00ff88, 0 0 20px #ff00ff44;
+  }
+  
+  .neon-text-cyan {
+    color: #00ffff;
+    text-shadow: 0 0 10px #00ffff88, 0 0 20px #00ffff44;
+  }
+
+  .neon-text-green {
+    color: #00ff66;
+    text-shadow: 0 0 10px #00ff6688, 0 0 20px #00ff6644;
+  }
+
+  .neon-text-red {
+    color: #ff0066;
+    text-shadow: 0 0 10px #ff006688, 0 0 20px #ff006644;
+  }
+
+  .neon-text-orange {
+    color: #ffaa00;
+    text-shadow: 0 0 10px #ffaa0088, 0 0 20px #ffaa0044;
+  }
+
+  .neon-card {
+    background: linear-gradient(135deg, #1a1a2ecc, #16213ecc);
+    border: 1px solid #00ffff33;
+    border-radius: 16px;
+    box-shadow: 0 0 20px #00ffff11;
+    backdrop-filter: blur(10px);
+  }
+
+  .neon-card-danger {
+    background: linear-gradient(135deg, #2e1a1acc, #3e1616cc);
+    border: 1px solid #ff006644;
+    border-radius: 16px;
+    box-shadow: 0 0 25px #ff006622;
+    animation: dangerPulse 2s ease-in-out infinite;
+  }
+
+  .neon-card-safe {
+    background: linear-gradient(135deg, #1a2e1acc, #163e16cc);
+    border: 1px solid #00ff6644;
+    border-radius: 16px;
+    box-shadow: 0 0 25px #00ff6622;
+  }
+
+  .neon-card-warn {
+    background: linear-gradient(135deg, #2e2a1acc, #3e3016cc);
+    border: 1px solid #ffaa0044;
+    border-radius: 16px;
+    box-shadow: 0 0 25px #ffaa0022;
+  }
+
+  .neon-btn {
+    background: linear-gradient(135deg, #ff00ff, #8b00ff);
+    color: #fff;
+    box-shadow: 0 0 25px #ff00ff44, 0 0 50px #ff00ff22;
+    transition: all 0.3s ease;
+    animation: btnPulse 2s ease-in-out infinite;
+  }
+
+  .neon-btn:hover {
+    background: linear-gradient(135deg, #00ffff, #0088ff);
+    box-shadow: 0 0 35px #00ffff55, 0 0 70px #00ffff33;
+    transform: scale(1.03);
+  }
+
+  .neon-input {
+    background: #1a1a2e;
+    border: 1px solid #ff00ff44;
+    color: #c0c0ff;
+  }
+
+  .neon-input:focus {
+    outline: none;
+    border-color: #00ffff;
+    box-shadow: 0 0 12px #00ffff88;
+  }
+}
+
+@keyframes dangerPulse {
+  0%, 100% { box-shadow: 0 0 25px #ff006622; }
+  50% { box-shadow: 0 0 40px #ff006644; }
+}
+
+@keyframes btnPulse {
+  0%, 100% { box-shadow: 0 0 25px #ff00ff44, 0 0 50px #ff00ff22; }
+  50% { box-shadow: 0 0 35px #ff00ff66, 0 0 70px #ff00ff33; }
+}
+
+@keyframes headerGlow {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+.header-gradient {
+  background: linear-gradient(90deg, #ff00ff33, #00ffff33, #ff00ff33);
+  background-size: 200% 100%;
+  animation: headerGlow 4s ease infinite;
+}
