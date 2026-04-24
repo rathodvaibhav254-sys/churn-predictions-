@@ -46,162 +46,244 @@ export default function Home() {
   };
 
   return (
-    <div className="min-h-screen bg-white">
-      <main className="streamlit-container flex flex-col gap-8">
-        <h1 className="text-4xl font-bold mb-4">🔮 Predict Churn</h1>
+    <div className="min-h-screen bg-slate-50">
+      {/* Professional Header */}
+      <header className="bg-white border-b border-slate-200 shadow-sm sticky top-0 z-10">
+        <div className="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
+          <div className="flex items-center gap-3">
+            <div className="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center text-white font-bold">
+              C
+            </div>
+            <div>
+              <h1 className="text-xl font-bold text-slate-800 tracking-tight">ChurnPredict</h1>
+              <p className="text-xs text-slate-500 font-medium">Enterprise Intelligence</p>
+            </div>
+          </div>
+          <div className="text-sm text-slate-500 font-medium hidden sm:block">
+            Model Status: <span className="text-green-600">Online</span>
+          </div>
+        </div>
+      </header>
+
+      <main className="max-w-6xl mx-auto px-6 py-8">
         
-        <div className="flex flex-col md:flex-row gap-8">
+        <div className="mb-8">
+          <h2 className="text-2xl font-bold text-slate-800">Customer Risk Assessment</h2>
+          <p className="text-slate-500 mt-1">Enter customer demographics and behavior metrics to forecast retention.</p>
+        </div>
+
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
+          
           {/* Form Section */}
-          <section className="flex-1">
-            <h2 className="text-2xl font-semibold mb-4">📋 Customer Details</h2>
-            <form onSubmit={handleSubmit} className="space-y-4">
-              <div>
-                <label className="block mb-1 text-sm">Age: {formData.age}</label>
-                <input type="range" name="age" min="18" max="80" value={formData.age} onChange={handleChange} className="w-full" />
-              </div>
+          <section className="lg:col-span-5">
+            <div className="prof-card p-6">
+              <h3 className="text-lg font-semibold text-slate-800 mb-5 border-b border-slate-100 pb-3">
+                Customer Profile
+              </h3>
+              
+              <form onSubmit={handleSubmit} className="space-y-5">
+                <div>
+                  <div className="flex justify-between mb-1">
+                    <label className="text-sm font-semibold text-slate-700">Age</label>
+                    <span className="text-sm font-medium text-slate-500">{formData.age} years</span>
+                  </div>
+                  <input type="range" name="age" min="18" max="80" value={formData.age} onChange={handleChange} className="w-full accent-blue-600" />
+                </div>
 
-              <div>
-                <label className="block mb-1 text-sm">Frequent Flyer</label>
-                <select name="freqFlyer" value={formData.freqFlyer} onChange={handleChange} className="st-input">
-                  <option value="Yes">Yes</option>
-                  <option value="No">No</option>
-                </select>
-              </div>
+                <div>
+                  <label className="block text-sm font-semibold text-slate-700 mb-1">Frequent Flyer Status</label>
+                  <select name="freqFlyer" value={formData.freqFlyer} onChange={handleChange} className="prof-input">
+                    <option value="Yes">Yes - Active</option>
+                    <option value="No">No - Inactive</option>
+                  </select>
+                </div>
 
-              <div>
-                <label className="block mb-1 text-sm">Income</label>
-                <select name="income" value={formData.income} onChange={handleChange} className="st-input">
-                  <option value="Low Income">Low Income</option>
-                  <option value="Middle Income">Middle Income</option>
-                  <option value="High Income">High Income</option>
-                </select>
-              </div>
+                <div>
+                  <label className="block text-sm font-semibold text-slate-700 mb-1">Annual Income Bracket</label>
+                  <select name="income" value={formData.income} onChange={handleChange} className="prof-input">
+                    <option value="Low Income">Low Income</option>
+                    <option value="Middle Income">Middle Income</option>
+                    <option value="High Income">High Income</option>
+                  </select>
+                </div>
 
-              <div>
-                <label className="block mb-1 text-sm">Services: {formData.services}</label>
-                <input type="range" name="services" min="1" max="6" value={formData.services} onChange={handleChange} className="w-full" />
-              </div>
+                <div>
+                  <div className="flex justify-between mb-1">
+                    <label className="text-sm font-semibold text-slate-700">Services Opted</label>
+                    <span className="text-sm font-medium text-slate-500">{formData.services} services</span>
+                  </div>
+                  <input type="range" name="services" min="1" max="6" value={formData.services} onChange={handleChange} className="w-full accent-blue-600" />
+                </div>
 
-              <div>
-                <label className="block mb-1 text-sm">Social Media</label>
-                <select name="social" value={formData.social} onChange={handleChange} className="st-input">
-                  <option value="Yes">Yes</option>
-                  <option value="No">No</option>
-                </select>
-              </div>
+                <div className="grid grid-cols-2 gap-4">
+                  <div>
+                    <label className="block text-sm font-semibold text-slate-700 mb-1">Social Media Sync</label>
+                    <select name="social" value={formData.social} onChange={handleChange} className="prof-input">
+                      <option value="Yes">Synced</option>
+                      <option value="No">Not Synced</option>
+                    </select>
+                  </div>
 
-              <div>
-                <label className="block mb-1 text-sm">Hotel</label>
-                <select name="hotel" value={formData.hotel} onChange={handleChange} className="st-input">
-                  <option value="Yes">Yes</option>
-                  <option value="No">No</option>
-                </select>
-              </div>
+                  <div>
+                    <label className="block text-sm font-semibold text-slate-700 mb-1">Hotel Booked</label>
+                    <select name="hotel" value={formData.hotel} onChange={handleChange} className="prof-input">
+                      <option value="Yes">Yes</option>
+                      <option value="No">No</option>
+                    </select>
+                  </div>
+                </div>
 
-              <button type="submit" disabled={loading} className="st-btn mt-4">
-                {loading ? 'Processing...' : 'Predict'}
-              </button>
-            </form>
+                <div className="pt-4 mt-2 border-t border-slate-100">
+                  <button type="submit" disabled={loading} className="w-full prof-btn flex justify-center items-center gap-2">
+                    {loading ? (
+                      <>
+                        <svg className="animate-spin -ml-1 mr-2 h-4 w-4 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                          <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                          <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                        </svg>
+                        Running Analysis...
+                      </>
+                    ) : 'Run Prediction Model'}
+                  </button>
+                </div>
+              </form>
+            </div>
           </section>
 
           {/* Results Section */}
-          <section className="flex-1">
-            <h2 className="text-2xl font-semibold mb-4">🎲 Prediction Results</h2>
-            
-            {prediction && (
-              <div className="space-y-6">
-                <hr className="border-gray-200" />
-                
-                {/* Main Prediction Display matched to Streamlit app.py exactly */}
-                {prediction.pred === 1 ? (
-                  <div className="st-card-danger">
-                    <h3 className="text-[#ff6b6b] mt-0 text-xl font-bold mb-2">⚠️ CUSTOMER WILL CHURN</h3>
-                    <p className="text-[18px] text-[#ff6b6b] font-bold m-0">Churn Risk: {prediction.prob.toFixed(1)}%</p>
-                  </div>
-                ) : prediction.prob > 40 ? (
-                  <div className="st-card-warn">
-                    <h3 className="text-[#ff8c00] mt-0 text-xl font-bold mb-2">⚠️ CUSTOMER AT RISK</h3>
-                    <p className="text-[18px] text-[#ff8c00] font-bold m-0">Churn Risk: {prediction.prob.toFixed(1)}%</p>
-                  </div>
-                ) : (
-                  <div className="st-card-safe">
-                    <h3 className="text-[#51cf66] mt-0 text-xl font-bold mb-2">✅ CUSTOMER WILL NOT CHURN</h3>
-                    <p className="text-[18px] text-[#51cf66] font-bold m-0">Churn Risk: {prediction.prob.toFixed(1)}%</p>
-                  </div>
-                )}
-                
-                <hr className="border-gray-200" />
-                
-                <div>
-                  <h3 className="text-xl font-semibold mb-4">📊 Probability Breakdown</h3>
-                  <div className="flex gap-4">
-                    <div className="flex-1 st-card text-center">
-                      <p className="text-sm text-gray-600">No Churn Probability</p>
-                      <p className="text-2xl font-mono">{(100 - prediction.prob).toFixed(2)}%</p>
-                    </div>
-                    <div className="flex-1 st-card text-center">
-                      <p className="text-sm text-gray-600">Churn Probability</p>
-                      <p className="text-2xl font-mono">{prediction.prob.toFixed(2)}%</p>
-                    </div>
-                  </div>
+          <section className="lg:col-span-7">
+            <div className="prof-card p-6 h-full flex flex-col">
+              <h3 className="text-lg font-semibold text-slate-800 mb-5 border-b border-slate-100 pb-3">
+                Analysis Results
+              </h3>
+              
+              {!prediction ? (
+                <div className="flex-1 flex flex-col items-center justify-center text-slate-400 p-12 text-center border-2 border-dashed border-slate-200 rounded-lg">
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-16 w-16 mb-4 text-slate-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+                  </svg>
+                  <p className="font-medium text-slate-500">Awaiting input data</p>
+                  <p className="text-sm mt-1">Submit the customer profile to generate a risk forecast.</p>
                 </div>
-
-                <hr className="border-gray-200" />
-                
-                <div>
-                  <h3 className="text-xl font-semibold mb-4">🎯 Recommendation</h3>
+              ) : (
+                <div className="space-y-6 flex-1">
+                  
+                  {/* Status Banner */}
                   {prediction.pred === 1 ? (
-                    <>
-                      <div className="bg-[#ffcccc] text-[#cc0000] p-3 rounded mb-2">🔴 <strong>Status:</strong> IMMEDIATE ACTION REQUIRED</div>
-                      <div className="bg-[#fff3cd] text-[#856404] p-3 rounded">
-                        <strong>Actions to take:</strong>
-                        <ul className="list-disc ml-5 mt-1">
-                          <li>Initiate retention campaign immediately</li>
-                          <li>Offer personalized travel packages</li>
-                          <li>Provide exclusive loyalty rewards</li>
-                          <li>Schedule direct customer outreach</li>
-                          <li>Review recent complaints or issues</li>
-                        </ul>
+                    <div className="status-danger p-5 rounded-lg flex items-center justify-between">
+                      <div>
+                        <h4 className="text-red-700 font-bold text-lg mb-1">High Churn Risk Detected</h4>
+                        <p className="text-red-600 text-sm font-medium">Customer is highly likely to leave the platform.</p>
                       </div>
-                    </>
+                      <div className="text-right">
+                        <div className="text-3xl font-black text-red-700">{prediction.prob.toFixed(1)}%</div>
+                        <div className="text-xs text-red-500 font-bold uppercase tracking-wider mt-1">Probability</div>
+                      </div>
+                    </div>
                   ) : prediction.prob > 40 ? (
-                    <>
-                      <div className="bg-[#fff3cd] text-[#856404] p-3 rounded mb-2">🟠 <strong>Status:</strong> MONITOR CLOSELY</div>
-                      <div className="bg-[#d1ecf1] text-[#0c5460] p-3 rounded">
-                        <strong>Actions to take:</strong>
-                        <ul className="list-disc ml-5 mt-1">
-                          <li>Monitor customer activity</li>
-                          <li>Proactive engagement campaigns</li>
-                          <li>Offer special incentives</li>
-                          <li>Regular check-in calls</li>
-                        </ul>
+                    <div className="status-warn p-5 rounded-lg flex items-center justify-between">
+                      <div>
+                        <h4 className="text-amber-700 font-bold text-lg mb-1">Elevated Risk Warning</h4>
+                        <p className="text-amber-600 text-sm font-medium">Customer shows signs of potential churn.</p>
                       </div>
-                    </>
+                      <div className="text-right">
+                        <div className="text-3xl font-black text-amber-700">{prediction.prob.toFixed(1)}%</div>
+                        <div className="text-xs text-amber-500 font-bold uppercase tracking-wider mt-1">Probability</div>
+                      </div>
+                    </div>
                   ) : (
-                    <>
-                      <div className="bg-[#d4edda] text-[#155724] p-3 rounded mb-2">🟢 <strong>Status:</strong> SATISFIED CUSTOMER</div>
-                      <div className="bg-[#d4edda] text-[#155724] p-3 rounded">
-                        <strong>Actions to take:</strong>
-                        <ul className="list-disc ml-5 mt-1">
-                          <li>Continue excellent service</li>
-                          <li>Encourage loyalty program participation</li>
-                          <li>Upsell additional services</li>
-                          <li>Request referrals</li>
-                        </ul>
+                    <div className="status-safe p-5 rounded-lg flex items-center justify-between">
+                      <div>
+                        <h4 className="text-green-700 font-bold text-lg mb-1">Customer Retained</h4>
+                        <p className="text-green-600 text-sm font-medium">Low risk of churn based on current metrics.</p>
                       </div>
-                    </>
+                      <div className="text-right">
+                        <div className="text-3xl font-black text-green-700">{prediction.prob.toFixed(1)}%</div>
+                        <div className="text-xs text-green-500 font-bold uppercase tracking-wider mt-1">Probability</div>
+                      </div>
+                    </div>
                   )}
+                  
+                  {/* Probability Breakdown */}
+                  <div>
+                    <h4 className="text-sm font-bold text-slate-700 uppercase tracking-wider mb-3">Model Confidence</h4>
+                    <div className="grid grid-cols-2 gap-4">
+                      <div className="bg-slate-50 border border-slate-200 p-4 rounded-lg">
+                        <p className="text-xs text-slate-500 font-semibold mb-1 uppercase">Retention</p>
+                        <div className="flex items-end gap-2">
+                          <span className="text-2xl font-bold text-slate-800">{(100 - prediction.prob).toFixed(1)}</span>
+                          <span className="text-slate-500 font-medium mb-1">%</span>
+                        </div>
+                      </div>
+                      <div className="bg-slate-50 border border-slate-200 p-4 rounded-lg">
+                        <p className="text-xs text-slate-500 font-semibold mb-1 uppercase">Attrition</p>
+                        <div className="flex items-end gap-2">
+                          <span className="text-2xl font-bold text-slate-800">{prediction.prob.toFixed(1)}</span>
+                          <span className="text-slate-500 font-medium mb-1">%</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Actionable Insights */}
+                  <div>
+                    <h4 className="text-sm font-bold text-slate-700 uppercase tracking-wider mb-3">Recommended Actions</h4>
+                    
+                    <div className="bg-white border border-slate-200 rounded-lg overflow-hidden">
+                      {prediction.pred === 1 ? (
+                        <ul className="divide-y divide-slate-100">
+                          <li className="px-4 py-3 flex gap-3 items-start">
+                            <span className="text-red-500 mt-0.5">•</span>
+                            <span className="text-slate-700 text-sm">Deploy immediate retention offer via account manager.</span>
+                          </li>
+                          <li className="px-4 py-3 flex gap-3 items-start">
+                            <span className="text-red-500 mt-0.5">•</span>
+                            <span className="text-slate-700 text-sm">Review recent support tickets for unresolved issues.</span>
+                          </li>
+                          <li className="px-4 py-3 flex gap-3 items-start">
+                            <span className="text-red-500 mt-0.5">•</span>
+                            <span className="text-slate-700 text-sm">Offer personalized travel package discounts.</span>
+                          </li>
+                        </ul>
+                      ) : prediction.prob > 40 ? (
+                        <ul className="divide-y divide-slate-100">
+                          <li className="px-4 py-3 flex gap-3 items-start">
+                            <span className="text-amber-500 mt-0.5">•</span>
+                            <span className="text-slate-700 text-sm">Schedule a proactive check-in call within 7 days.</span>
+                          </li>
+                          <li className="px-4 py-3 flex gap-3 items-start">
+                            <span className="text-amber-500 mt-0.5">•</span>
+                            <span className="text-slate-700 text-sm">Send targeted marketing campaigns based on activity.</span>
+                          </li>
+                        </ul>
+                      ) : (
+                        <ul className="divide-y divide-slate-100">
+                          <li className="px-4 py-3 flex gap-3 items-start">
+                            <span className="text-green-500 mt-0.5">•</span>
+                            <span className="text-slate-700 text-sm">Identify for upselling premium services.</span>
+                          </li>
+                          <li className="px-4 py-3 flex gap-3 items-start">
+                            <span className="text-green-500 mt-0.5">•</span>
+                            <span className="text-slate-700 text-sm">Request referral or testimonial.</span>
+                          </li>
+                        </ul>
+                      )}
+                    </div>
+                  </div>
+
                 </div>
-              </div>
-            )}
+              )}
+            </div>
           </section>
-        </div>
-        
-        <hr className="border-gray-200 mt-8" />
-        <div className="text-center text-[#888] text-[11px] pt-4">
-          <p>🚀 Random Forest Churn Prediction | v1.0</p>
+
         </div>
       </main>
+      
+      <footer className="mt-12 py-6 text-center border-t border-slate-200">
+        <p className="text-slate-400 text-xs font-medium tracking-wide">
+          © {new Date().getFullYear()} ChurnPredict ML Platform &middot; All rights reserved.
+        </p>
+      </footer>
     </div>
   );
 }

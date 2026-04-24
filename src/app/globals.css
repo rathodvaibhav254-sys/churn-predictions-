@@ -1,94 +1,87 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 @layer base {
   :root {
-    --background: #ffffff;
-    --foreground: #31333F;
+    --background: #f8fafc;
+    --foreground: #0f172a;
+    --primary: #2563eb;
+    --primary-hover: #1d4ed8;
+    --card-bg: #ffffff;
+    --border: #e2e8f0;
   }
   
   body {
     background-color: var(--background);
     color: var(--foreground);
-    font-family: "Source Sans Pro", sans-serif;
+    font-family: 'Inter', sans-serif;
   }
 }
 
 @layer utilities {
-  .streamlit-container {
-    max-width: 730px;
-    margin: 0 auto;
-    padding: 2rem 1rem;
+  .prof-card {
+    background-color: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 0.75rem;
+    box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.05), 0 2px 4px -2px rgb(0 0 0 / 0.05);
   }
 
-  .risk-high {
-    color: #ff6b6b;
-    font-weight: bold;
-    font-size: 20px;
-  }
-
-  .risk-low {
-    color: #51cf66;
-    font-weight: bold;
-    font-size: 20px;
-  }
-
-  .risk-medium {
-    color: #ffa94d;
-    font-weight: bold;
-    font-size: 20px;
-  }
-
-  .st-card {
-    border-radius: 0.5rem;
-    padding: 1.25rem;
-    background-color: #f0f2f6;
-  }
-
-  .st-card-danger {
-    background-color: #ffe6e6;
-    border-left: 5px solid #ff6b6b;
-    padding: 1.25rem;
-    border-radius: 0.5rem;
-  }
-
-  .st-card-warn {
-    background-color: #fff3e0;
-    border-left: 5px solid #ffa94d;
-    padding: 1.25rem;
-    border-radius: 0.5rem;
-  }
-
-  .st-card-safe {
-    background-color: #e6ffe6;
-    border-left: 5px solid #51cf66;
-    padding: 1.25rem;
-    border-radius: 0.5rem;
-  }
-  
-  .st-input {
+  .prof-input {
     width: 100%;
-    padding: 0.5rem;
-    border-radius: 0.25rem;
-    border: 1px solid #dcdcdc;
+    padding: 0.625rem 0.875rem;
+    border-radius: 0.5rem;
+    border: 1px solid #cbd5e1;
     background-color: #ffffff;
-    color: #31333F;
+    color: #334155;
+    transition: all 0.2s;
+    font-size: 0.875rem;
   }
 
-  .st-btn {
-    width: 100%;
-    padding: 0.5rem 1rem;
-    background-color: #ffffff;
-    border: 1px solid #dcdcdc;
-    border-radius: 0.25rem;
-    color: #31333F;
-    font-weight: 400;
-    cursor: pointer;
+  .prof-input:focus {
+    outline: none;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
   }
-  
-  .st-btn:hover {
-    border-color: #ff4b4b;
-    color: #ff4b4b;
+
+  .prof-btn {
+    background-color: var(--primary);
+    color: #ffffff;
+    padding: 0.75rem 1.5rem;
+    border-radius: 0.5rem;
+    font-weight: 500;
+    transition: all 0.2s;
+    box-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  }
+
+  .prof-btn:hover:not(:disabled) {
+    background-color: var(--primary-hover);
+    box-shadow: 0 4px 6px -1px rgba(37, 99, 235, 0.2);
+    transform: translateY(-1px);
+  }
+
+  .prof-btn:disabled {
+    background-color: #94a3b8;
+    cursor: not-allowed;
+  }
+
+  /* Status Cards */
+  .status-danger {
+    background-color: #fef2f2;
+    border: 1px solid #fecaca;
+    border-left: 6px solid #ef4444;
+  }
+
+  .status-warn {
+    background-color: #fffbeb;
+    border: 1px solid #fde68a;
+    border-left: 6px solid #f59e0b;
+  }
+
+  .status-safe {
+    background-color: #f0fdf4;
+    border: 1px solid #bbf7d0;
+    border-left: 6px solid #22c55e;
   }
 }
