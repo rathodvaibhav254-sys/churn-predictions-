@@ -46,142 +46,162 @@ export default function Home() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col">
-      <header className="header-gradient py-6 border-b border-[#00ffff22] shadow-[0_0_20px_#00ffff11]">
-        <h1 className="text-center text-4xl neon-text-magenta font-black tracking-widest">
-          ⚡ CHURN ORACLE ⚡
-        </h1>
-        <p className="text-center text-[#00ffff] font-rajdhani mt-2 tracking-[0.2em] opacity-80">
-          NEURAL ENGINE v2.0
-        </p>
-      </header>
-
-      <main className="flex-1 container mx-auto px-4 py-12 flex flex-col md:flex-row gap-8">
-        {/* Form Section */}
-        <section className="flex-1 neon-card p-8">
-          <h2 className="text-2xl text-[#00ffff] border-b border-[#00ffff22] pb-3 mb-6 flex items-center gap-2">
-            📋 Customer Details
-          </h2>
-          <form onSubmit={handleSubmit} className="space-y-6">
-            <div>
-              <label className="block text-[#c0c0ff] mb-2 font-medium">Age: {formData.age}</label>
-              <input type="range" name="age" min="18" max="80" value={formData.age} onChange={handleChange} className="w-full accent-[#ff00ff]" />
-            </div>
-
-            <div>
-              <label className="block text-[#c0c0ff] mb-2 font-medium">Frequent Flyer</label>
-              <select name="freqFlyer" value={formData.freqFlyer} onChange={handleChange} className="w-full neon-input rounded-lg p-3">
-                <option value="Yes">Yes</option>
-                <option value="No">No</option>
-              </select>
-            </div>
-
-            <div>
-              <label className="block text-[#c0c0ff] mb-2 font-medium">Annual Income Class</label>
-              <select name="income" value={formData.income} onChange={handleChange} className="w-full neon-input rounded-lg p-3">
-                <option value="Low Income">Low Income</option>
-                <option value="Middle Income">Middle Income</option>
-                <option value="High Income">High Income</option>
-              </select>
-            </div>
-
-            <div>
-              <label className="block text-[#c0c0ff] mb-2 font-medium">Services Opted: {formData.services}</label>
-              <input type="range" name="services" min="1" max="6" value={formData.services} onChange={handleChange} className="w-full accent-[#ff00ff]" />
-            </div>
-
-            <div>
-              <label className="block text-[#c0c0ff] mb-2 font-medium">Synced to Social Media</label>
-              <select name="social" value={formData.social} onChange={handleChange} className="w-full neon-input rounded-lg p-3">
-                <option value="Yes">Yes</option>
-                <option value="No">No</option>
-              </select>
-            </div>
-
-            <div>
-              <label className="block text-[#c0c0ff] mb-2 font-medium">Booked Hotel</label>
-              <select name="hotel" value={formData.hotel} onChange={handleChange} className="w-full neon-input rounded-lg p-3">
-                <option value="Yes">Yes</option>
-                <option value="No">No</option>
-              </select>
-            </div>
-
-            <button type="submit" disabled={loading} className="w-full neon-btn py-4 rounded-xl font-bold tracking-widest mt-8">
-              {loading ? 'ANALYZING...' : 'PREDICT CHURN 🚀'}
-            </button>
-          </form>
-        </section>
-
-        {/* Results Section */}
-        <section className="flex-1">
-          <h2 className="text-2xl text-[#00ffff] border-b border-[#00ffff22] pb-3 mb-6 flex items-center gap-2">
-            🎲 Prediction Results
-          </h2>
-          
-          {!prediction ? (
-            <div className="neon-card p-12 text-center h-[500px] flex items-center justify-center">
-              <p className="text-[#c0c0ff] text-xl opacity-60 italic">Awaiting customer data...</p>
-            </div>
-          ) : (
-            <div className="space-y-6">
-              {/* Main Result Card */}
-              {prediction.pred === 1 ? (
-                <div className="neon-card-danger p-8 text-center">
-                  <h3 className="orbitron text-3xl neon-text-red mb-4">🚨 CUSTOMER WILL CHURN</h3>
-                  <p className="orbitron text-5xl font-black neon-text-red">{prediction.prob.toFixed(1)}%</p>
-                  <p className="text-[#ff006688] font-bold mt-4 tracking-wider">THREAT LEVEL: CRITICAL</p>
-                </div>
-              ) : prediction.prob > 40 ? (
-                <div className="neon-card-warn p-8 text-center">
-                  <h3 className="orbitron text-3xl neon-text-orange mb-4">⚠️ CUSTOMER AT RISK</h3>
-                  <p className="orbitron text-5xl font-black neon-text-orange">{prediction.prob.toFixed(1)}%</p>
-                  <p className="text-[#ffaa0088] font-bold mt-4 tracking-wider">THREAT LEVEL: ELEVATED</p>
-                </div>
-              ) : (
-                <div className="neon-card-safe p-8 text-center">
-                  <h3 className="orbitron text-3xl neon-text-green mb-4">✅ CUSTOMER SECURE</h3>
-                  <p className="orbitron text-5xl font-black neon-text-green">{prediction.prob.toFixed(1)}%</p>
-                  <p className="text-[#00ff6688] font-bold mt-4 tracking-wider">THREAT LEVEL: MINIMAL</p>
-                </div>
-              )}
-
-              {/* Recommendation Card */}
-              <div className="neon-card p-6">
-                <h3 className="text-xl text-[#00ffff] mb-4 border-b border-[#00ffff22] pb-2">🎯 Recommendation</h3>
-                {prediction.pred === 1 ? (
-                  <ul className="list-disc list-inside text-[#ff0066] space-y-2 opacity-90">
-                    <li>Initiate retention campaign immediately</li>
-                    <li>Offer personalized travel packages</li>
-                    <li>Provide exclusive loyalty rewards</li>
-                    <li>Schedule direct customer outreach</li>
-                  </ul>
-                ) : prediction.prob > 40 ? (
-                  <ul className="list-disc list-inside text-[#ffaa00] space-y-2 opacity-90">
-                    <li>Monitor customer activity</li>
-                    <li>Proactive engagement campaigns</li>
-                    <li>Offer special incentives</li>
-                    <li>Regular check-in calls</li>
-                  </ul>
-                ) : (
-                  <ul className="list-disc list-inside text-[#00ff66] space-y-2 opacity-90">
-                    <li>Continue excellent service</li>
-                    <li>Encourage loyalty program participation</li>
-                    <li>Upsell additional services</li>
-                    <li>Request referrals</li>
-                  </ul>
-                )}
+    <div className="min-h-screen bg-white">
+      <main className="streamlit-container flex flex-col gap-8">
+        <h1 className="text-4xl font-bold mb-4">🔮 Predict Churn</h1>
+        
+        <div className="flex flex-col md:flex-row gap-8">
+          {/* Form Section */}
+          <section className="flex-1">
+            <h2 className="text-2xl font-semibold mb-4">📋 Customer Details</h2>
+            <form onSubmit={handleSubmit} className="space-y-4">
+              <div>
+                <label className="block mb-1 text-sm">Age: {formData.age}</label>
+                <input type="range" name="age" min="18" max="80" value={formData.age} onChange={handleChange} className="w-full" />
               </div>
-            </div>
-          )}
-        </section>
-      </main>
 
-      <footer className="py-6 border-t border-[#ff00ff22] mt-auto">
-        <p className="text-center orbitron text-[#ff00ff88] text-xs tracking-[0.3em]">
-          ⚡ NEURAL CHURN ENGINE v2.0 ⚡<br/>
-          <span className="text-[10px] text-[#00ffff44]">POWERED BY RANDOM FOREST & VERCEL</span>
-        </p>
-      </footer>
+              <div>
+                <label className="block mb-1 text-sm">Frequent Flyer</label>
+                <select name="freqFlyer" value={formData.freqFlyer} onChange={handleChange} className="st-input">
+                  <option value="Yes">Yes</option>
+                  <option value="No">No</option>
+                </select>
+              </div>
+
+              <div>
+                <label className="block mb-1 text-sm">Income</label>
+                <select name="income" value={formData.income} onChange={handleChange} className="st-input">
+                  <option value="Low Income">Low Income</option>
+                  <option value="Middle Income">Middle Income</option>
+                  <option value="High Income">High Income</option>
+                </select>
+              </div>
+
+              <div>
+                <label className="block mb-1 text-sm">Services: {formData.services}</label>
+                <input type="range" name="services" min="1" max="6" value={formData.services} onChange={handleChange} className="w-full" />
+              </div>
+
+              <div>
+                <label className="block mb-1 text-sm">Social Media</label>
+                <select name="social" value={formData.social} onChange={handleChange} className="st-input">
+                  <option value="Yes">Yes</option>
+                  <option value="No">No</option>
+                </select>
+              </div>
+
+              <div>
+                <label className="block mb-1 text-sm">Hotel</label>
+                <select name="hotel" value={formData.hotel} onChange={handleChange} className="st-input">
+                  <option value="Yes">Yes</option>
+                  <option value="No">No</option>
+                </select>
+              </div>
+
+              <button type="submit" disabled={loading} className="st-btn mt-4">
+                {loading ? 'Processing...' : 'Predict'}
+              </button>
+            </form>
+          </section>
+
+          {/* Results Section */}
+          <section className="flex-1">
+            <h2 className="text-2xl font-semibold mb-4">🎲 Prediction Results</h2>
+            
+            {prediction && (
+              <div className="space-y-6">
+                <hr className="border-gray-200" />
+                
+                {/* Main Prediction Display matched to Streamlit app.py exactly */}
+                {prediction.pred === 1 ? (
+                  <div className="st-card-danger">
+                    <h3 className="text-[#ff6b6b] mt-0 text-xl font-bold mb-2">⚠️ CUSTOMER WILL CHURN</h3>
+                    <p className="text-[18px] text-[#ff6b6b] font-bold m-0">Churn Risk: {prediction.prob.toFixed(1)}%</p>
+                  </div>
+                ) : prediction.prob > 40 ? (
+                  <div className="st-card-warn">
+                    <h3 className="text-[#ff8c00] mt-0 text-xl font-bold mb-2">⚠️ CUSTOMER AT RISK</h3>
+                    <p className="text-[18px] text-[#ff8c00] font-bold m-0">Churn Risk: {prediction.prob.toFixed(1)}%</p>
+                  </div>
+                ) : (
+                  <div className="st-card-safe">
+                    <h3 className="text-[#51cf66] mt-0 text-xl font-bold mb-2">✅ CUSTOMER WILL NOT CHURN</h3>
+                    <p className="text-[18px] text-[#51cf66] font-bold m-0">Churn Risk: {prediction.prob.toFixed(1)}%</p>
+                  </div>
+                )}
+                
+                <hr className="border-gray-200" />
+                
+                <div>
+                  <h3 className="text-xl font-semibold mb-4">📊 Probability Breakdown</h3>
+                  <div className="flex gap-4">
+                    <div className="flex-1 st-card text-center">
+                      <p className="text-sm text-gray-600">No Churn Probability</p>
+                      <p className="text-2xl font-mono">{(100 - prediction.prob).toFixed(2)}%</p>
+                    </div>
+                    <div className="flex-1 st-card text-center">
+                      <p className="text-sm text-gray-600">Churn Probability</p>
+                      <p className="text-2xl font-mono">{prediction.prob.toFixed(2)}%</p>
+                    </div>
+                  </div>
+                </div>
+
+                <hr className="border-gray-200" />
+                
+                <div>
+                  <h3 className="text-xl font-semibold mb-4">🎯 Recommendation</h3>
+                  {prediction.pred === 1 ? (
+                    <>
+                      <div className="bg-[#ffcccc] text-[#cc0000] p-3 rounded mb-2">🔴 <strong>Status:</strong> IMMEDIATE ACTION REQUIRED</div>
+                      <div className="bg-[#fff3cd] text-[#856404] p-3 rounded">
+                        <strong>Actions to take:</strong>
+                        <ul className="list-disc ml-5 mt-1">
+                          <li>Initiate retention campaign immediately</li>
+                          <li>Offer personalized travel packages</li>
+                          <li>Provide exclusive loyalty rewards</li>
+                          <li>Schedule direct customer outreach</li>
+                          <li>Review recent complaints or issues</li>
+                        </ul>
+                      </div>
+                    </>
+                  ) : prediction.prob > 40 ? (
+                    <>
+                      <div className="bg-[#fff3cd] text-[#856404] p-3 rounded mb-2">🟠 <strong>Status:</strong> MONITOR CLOSELY</div>
+                      <div className="bg-[#d1ecf1] text-[#0c5460] p-3 rounded">
+                        <strong>Actions to take:</strong>
+                        <ul className="list-disc ml-5 mt-1">
+                          <li>Monitor customer activity</li>
+                          <li>Proactive engagement campaigns</li>
+                          <li>Offer special incentives</li>
+                          <li>Regular check-in calls</li>
+                        </ul>
+                      </div>
+                    </>
+                  ) : (
+                    <>
+                      <div className="bg-[#d4edda] text-[#155724] p-3 rounded mb-2">🟢 <strong>Status:</strong> SATISFIED CUSTOMER</div>
+                      <div className="bg-[#d4edda] text-[#155724] p-3 rounded">
+                        <strong>Actions to take:</strong>
+                        <ul className="list-disc ml-5 mt-1">
+                          <li>Continue excellent service</li>
+                          <li>Encourage loyalty program participation</li>
+                          <li>Upsell additional services</li>
+                          <li>Request referrals</li>
+                        </ul>
+                      </div>
+                    </>
+                  )}
+                </div>
+              </div>
+            )}
+          </section>
+        </div>
+        
+        <hr className="border-gray-200 mt-8" />
+        <div className="text-center text-[#888] text-[11px] pt-4">
+          <p>🚀 Random Forest Churn Prediction | v1.0</p>
+        </div>
+      </main>
     </div>
   );
 }
